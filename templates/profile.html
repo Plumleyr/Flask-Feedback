@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 style="display: inline;">{{user.username}}'s Profile</h1>
+<form style="display: inline; position: absolute; right: 18%;" action="/users/{{user.username}}/feedback/add" method="GET"> 
+    <button type="submit" class="btn btn-success">Give Feedback</button>
+</form>
+<form style="display: inline; position: absolute; right: 4%;" action="/users/user.username/delete" method="POST"> 
+    <button type="submit" class="btn btn-danger">Delete {{user.username}}</button>
+</form>
+
+<div class="container" style="margin-top: 2em">{{user.email}}</div>
+<div class="container" style="margin-top: 2em">{{user.first_name ~ " " ~ user.last_name}}</div>
+
+{% for feedback in feedbacks %}
+<div class="container" style="margin-top: 2em">
+    <b>{{feedback.title}}</b>
+    <form style="display: inline; position: absolute; right: 19%;" action="/feedback/{{feedback.id}}/update" method="GET"> 
+        <button type="submit" class="btn btn-success">Update Feedback</button>
+    </form>
+    <form style="display: inline; position: absolute; right: 4%;" action="/feedback/{{feedback.id}}/delete" method="POST"> 
+        <button type="submit" class="btn btn-danger">Delete Feedback</button>
+    </form>
+</div>
+<div class="container">
+    {{feedback.content}}
+</div>
+{% endfor %}
+
+{% endblock %}
